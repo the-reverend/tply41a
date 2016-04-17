@@ -646,6 +646,8 @@ begin
       lfilename := addExt(paramStr(i), 'l')
     else if pasfilename='' then
       pasfilename := addExt(paramStr(i), 'pas')
+    else if codfilename='' then // added by ron wilson for multiple templates
+      codfilename := addExt(paramStr(i), 'cod')
     else
       begin
         writeln(illegal_no_args);
@@ -659,6 +661,7 @@ begin
     end;
 
   if pasfilename='' then pasfilename := root(lfilename)+'.pas';
+  if codfilename='' then codfilename := root(lfilename)+'.cod';
   lstfilename := root(lfilename)+'.lst';
 
   (* open files: *)
@@ -673,7 +676,7 @@ begin
 
   (* search code template in current directory, then on path where Lex
      was executed from: *)
-  codfilename := 'yylex.cod';
+//  codfilename := 'yylex.cod'; // removed by ron wilson for multiple templates
   assign(yycod, codfilename);
   reset(yycod);
   if ioresult<>0 then
